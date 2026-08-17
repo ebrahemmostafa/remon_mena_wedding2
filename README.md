@@ -15,7 +15,8 @@ A cinematic, single-page wedding invitation built with **plain HTML, CSS, and va
 - Cinematic venue section
 - Day-of timeline
 - Drag-to-explore photo gallery (mouse + touch)
-- RSVP form (front-end only — wire up to your own backend)
+- RSVP form connected to Supabase
+- `responses.html` dashboard with totals, refresh, and CSV export
 - Background music toggle (with smooth fade)
 
 ## 📁 Project Structure
@@ -23,10 +24,15 @@ A cinematic, single-page wedding invitation built with **plain HTML, CSS, and va
 ```
 wedding-static/
 ├── index.html
+├── responses.html
+├── supabase-schema.sql
 ├── css/
 │   └── styles.css
 ├── js/
-│   └── script.js
+│   ├── lang.js
+│   ├── rsvp-supabase.js
+│   ├── script.js
+│   └── supabase-config.js
 └── assets/
     ├── hero-bg.jpg
     ├── petra.jpg
@@ -53,6 +59,17 @@ npx serve
 
 Then visit http://localhost:8080.
 
+## RSVP + Supabase
+
+1. Create a Supabase project.
+2. Open Supabase SQL Editor and run `supabase-schema.sql`.
+3. Copy your Project URL and anon public key from Supabase Project Settings -> API.
+4. Paste them into `js/supabase-config.js`.
+5. Open `index.html` to submit RSVPs.
+6. Open `responses.html` to view responses and export CSV.
+
+The included SQL allows anonymous inserts and anonymous reads so the static `responses.html` page can work. If this page is public, anyone who finds it can read the RSVP table.
+
 ## 🌐 Deploy (GitHub Pages)
 
 1. Create a new GitHub repo and push these files.
@@ -72,6 +89,7 @@ Other one-click hosts that work out of the box:
 - **Photos**: replace the files in `assets/` keeping the same names, or update the references in `index.html` and the gallery list in `js/script.js`.
 - **Colors & typography**: tweak the CSS variables at the top of `css/styles.css`.
 - **Music**: change the audio URL inside `js/script.js`.
+- **RSVP database**: edit `js/supabase-config.js` with your Supabase project values.
 
 ## 📜 License
 
